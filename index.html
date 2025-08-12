@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balamurugan P - Software Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding: 20px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #e1e8ed;
+        }
+
+        @media print {
+            body {
+                background: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .container {
+                box-shadow: none;
+                border: 1px solid #e1e8ed;
+                background: #ffffff !important;
+            }
+            
+            .header {
+                background: #2c3e50 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .summary, .skill-category, .experience-item, .education-item {
+                background: #ffffff !important;
+                border: 1px solid #e1e8ed !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .skill-tag {
+                background: linear-gradient(135deg, #007bff, #0056b3) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color: #ffffff;
+            }
+
+            .main-content {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        }
+
+        .header {
+            background: #2c3e50;
+            color: #ffffff;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            letter-spacing: -0.5px;
+        }
+
+        .title {
+            font-size: 1.3em;
+            font-weight: 300;
+            opacity: 0.95;
+            margin-bottom: 20px;
+            color: #bdc3c7;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+            opacity: 0.9;
+            color: #ecf0f1;
+        }
+
+        .contact-item::before {
+            content: '•';
+            color: #007bff;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .main-content {
+            padding: 40px;
+            background: #ffffff;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #007bff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #0056b3;
+        }
+
+        .summary {
+            font-size: 1.05em;
+            line-height: 1.7;
+            color: #34495e;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 30px;
+            border: 1px solid #e1e8ed;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e1e8ed;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.1);
+        }
+
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            border: none;
+            transition: transform 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+
+        .experience-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e1e8ed;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.1);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            font-size: 1.05em;
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        .date-location {
+            text-align: right;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            line-height: 1.4;
+        }
+
+        .achievements {
+            list-style: none;
+            padding: 0;
+        }
+
+        .achievements li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #34495e;
+            line-height: 1.6;
+        }
+
+        .achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .education-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #007bff;
+            border: 1px solid #e1e8ed;
+        }
+
+        .degree {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .institution {
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        .duration {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .name {
+                font-size: 2em;
+            }
+            
+            .contact-info {
+                gap: 20px;
+            }
+            
+            .main-content {
+                padding: 30px 20px;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .date-location {
+                text-align: left;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1 class="name">Balamurugan P</h1>
+                <p class="title">Senior Software Developer</p>
+                <div class="contact-info">
+                    <div class="contact-item">Puducherry, India</div>
+                    <div class="contact-item">balabm1999@gmail.com</div>
+                    <div class="contact-item">https://www.linkedin.com/in/balamurugan-p-a6860619b/</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="section">
+                <div class="summary">
+                    Dynamic Full-Stack Software Developer with over 4 years of hands-on experience in architecting and deploying enterprise-level and SaaS products. Proven expertise in .NET/.NET Core (C#), MVC patterns, mobile applications, and robust API development. Strong foundation in backend development, cross-platform solutions, and security-first coding protocols. Adept at integrating third-party applications, leveraging cloud services (AWS), and incorporating emerging technologies such as AI/ML, serverless architectures, and DevOps practices. Experienced in Agile methodologies, team leadership, and developing AI-driven applications. Highly adaptable, capable of mastering any tech stack and switching seamlessly.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Programming Languages & Frameworks</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">C#</span>
+                            <span class="skill-tag">.NET Core</span>
+                            <span class="skill-tag">.NET MVC</span>
+                            <span class="skill-tag">Entity/ADO.NET</span>
+                            <span class="skill-tag">Node JS</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java Script</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Frontend & Mobile Technologies</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">Flutter</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Mobile App Development</span>
+                            <span class="skill-tag">Rive</span>
+                            <span class="skill-tag">Blender</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Backend & API Development</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">RESTful APIs</span>
+                            <span class="skill-tag">Web Services</span>
+                            <span class="skill-tag">API Integration</span>
+                            <span class="skill-tag">Microservices</span>
+                            <span class="skill-tag">GraphQL</span>
+                            <span class="skill-tag">Swagger</span>
+                            <span class="skill-tag">Payment Gateway Integration</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Database & Cloud Technologies</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">SQL Server</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">AWS (STT/TTS, EC2, S3)</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">IIS Deployment</span>
+                            <span class="skill-tag">Serverless Architectures</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>AI, DevOps & Development Tools</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Artificial Intelligence</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Rasa Framework</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">CI/CD Pipelines</span>
+                            <span class="skill-tag">Git/SourceTree</span>
+                            <span class="skill-tag">Crystal Reports</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Professional Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Software Developer</div>
+                            <div class="company">Elixir Business Solution Private Limited</div>
+                        </div>
+                        <div class="date-location">
+                            <div>Oct 2024 – Present</div>
+                            <div>Bengaluru, India</div>
+                        </div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Led the development of a responsive HRMS web app using Flutter & .NET Core, increasing cross-platform usability by 40%</li>
+                        <li>Led the development of a responsive HRMS web app using Flutter & .NET Core, increasing cross-platform usability by 40%</li>
+                        <li>Revamped a prototype into a production-ready solution with integrated automation</li>
+                        <li>Developed 10+ REST APIs via Swagger for syncing projects, timesheets, and validations</li>
+                        <li>Integrated .NET Core security features, reducing vulnerabilities by 60%</li>
+                        <li>Managed IIS deployments for client-specific frontend rollouts</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Software Engineer</div>
+                            <div class="company">Kaizen Voiz</div>
+                        </div>
+                        <div class="date-location">
+                            <div>Apr 2023 – Jul 2024</div>
+                            <div>Chennai, India</div>
+                        </div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Built .NET Core MVC web applications to support voice biometrics testing and validation</li>
+                        <li>Developed Flutter mobile applications to support multi-platform voice interaction tools</li>
+                        <li>Integrated AWS STT/TTS APIs for seamless voice authentication</li>
+                        <li>Led a 3-member development team, providing mentorship and managing project execution</li>
+                        <li>Created Rasa-based voice-enabled chatbots for customer interactions</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">.NET Developer</div>
+                            <div class="company">Odysseus Solutions</div>
+                        </div>
+                        <div class="date-location">
+                            <div>Sep 2021 – Dec 2022</div>
+                            <div>Bengaluru, India</div>
+                        </div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Enhanced a travel booking engine by fixing bugs and improving reliability</li>
+                        <li>Integrated payment gateways (Razorpay) for secure transactions</li>
+                        <li>Reduced database load by 30% through SQL query optimization</li>
+                        <li>Implemented frontend enhancements using TypeScript and modern JavaScript frameworks</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Software Engineer</div>
+                            <div class="company">Isource Technologies</div>
+                        </div>
+                        <div class="date-location">
+                            <div>Mar 2021 – Jul 2021</div>
+                            <div>New Delhi, India</div>
+                        </div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Developed backend modules for a Warehouse Management System (WMS) using .NET MVC and SQL</li>
+                        <li>Boosted system performance by 25% through query optimization</li>
+                        <li>Resolved critical bugs, increasing the warehouse system's stability</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Intern</div>
+                            <div class="company">ABI-Tech Solution</div>
+                        </div>
+                        <div class="date-location">
+                            <div>Sep 2020 – Mar 2021</div>
+                            <div>Puducherry, India</div>
+                        </div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Designed intuitive UI/UX pages for HRMS & ERP systems</li>
+                        <li>Created 20+ Crystal Reports and CRUD forms for data analysis</li>
+                        <li>Handled full-stack development from wireframes to backend services</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                
+                <div class="education-item">
+                    <div class="degree">Master of Computer Applications (MCA)</div>
+                    <div class="institution">Jain (Deemed-to-be University)</div>
+                    <div class="duration">Specialization: Artificial Intelligence | Jan 2024 – Aug 2025</div>
+                </div>
+
+                <div class="education-item">
+                    <div class="degree">Bachelor of Science (B.Sc.)</div>
+                    <div class="institution">VELS University</div>
+                    <div class="duration">Animation, Communication & Media Studies | 2017 – 2020</div>
+                </div>
+
+                <div class="education-item">
+                    <div class="degree">Engineering Foundation</div>
+                    <div class="institution">Sri Manakula Vinayagar Engineering College</div>
+                    <div class="duration">Diploma in Computer Engineering | 2017 – 2020</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
